@@ -12,7 +12,7 @@ import requests
 import openai
 
 # Set up OpenAI API
-openai.api_key = "sk-proj-R8sHBQxp088F31PTSAWFT3BlbkFJUGvaeGAyVXktfN1xGVUk"
+openai.api_key = "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"
 
 # Function to interact with OpenAI API
 def ask_ai(question):
