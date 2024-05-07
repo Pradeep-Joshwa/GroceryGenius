@@ -6,7 +6,52 @@ from apyori import apriori
 from wordcloud import WordCloud, STOPWORDS
 import matplotlib.pyplot as plt
 import requests
+#
+import openai
 
+# Set up OpenAI API key
+openai.api_key = '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'
+
+# Define OpenAI functions
+def generate_recipe_description(ingredients):
+    prompt = f"Generate a recipe description based on the following ingredients:\n- {', '.join(ingredients)}"
+    response = openai.Completion.create(
+        engine="text-davinci-003",
+        prompt=prompt,
+        max_tokens=150
+    )
+    return response.choices[0].text.strip()
+
+def clarify_query(query):
+    prompt = f"Clarify the following query:\n{query}"
+    response = openai.Completion.create(
+        engine="text-davinci-003",
+        prompt=prompt,
+        max_tokens=50
+    )
+    return response.choices[0].text.strip()
+
+st.title("Grocery Genius Recipe Recommendation")
+
+# Create input for user to enter ingredients
+ingredients_input = st.text_area("Enter ingredients separated by commas")
+
+# Create input for user query
+query_input = st.text_input("Enter your query")
+
+if st.button("Generate Recipe Description"):
+    if ingredients_input:
+        ingredients = [ingredient.strip() for ingredient in ingredients_input.split(',')]
+        recipe_description = generate_recipe_description(ingredients)
+        st.write("Recipe Description:")
+        st.write(recipe_description)
+
+if st.button("Clarify Query"):
+    if query_input:
+        clarified_query = clarify_query(query_input)
+        st.write("\nClarified Query:")
+        st.write(clarified_query)
+#
 def get_recipe_recommendations(selected_groceries):
     app_id = "fb4bb9e7"  # Replace with your Edamam API app ID
     app_key = "f28a3b21fbd5096ccd203509d2613502	—"  # Replace with your Edamam API app key
