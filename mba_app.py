@@ -80,12 +80,13 @@ if file_bytes is not None:
   output_final = output.replace("nan", "")
   new_title = '<p style="font-family:sans-serif; color:Green; font-size: 32px;">Recommended Items for above selected Item</p>'
   st.markdown(new_title, unsafe_allow_html=True)
-
-    #st.markdown("Recommended Items for above selected Item")
-    st.write(output_final)
+  st.write(output_final)
     st.write("Word Cloud Plot")
     wordcloud = WordCloud(background_color="white", max_words=words).generate(output_final)
     plt.imshow(wordcloud, interpolation='bilinear')
     plt.axis("off")
     plt.show()
     st.pyplot()
+
+
+  
