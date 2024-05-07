@@ -8,7 +8,7 @@ import matplotlib.pyplot as plt
 import requests
 
 def get_recipe_recommendations(selected_groceries):
-    api_key = "YOUR_API_KEY"  # Replace with your actual Recipe API key
+    api_key = "29a866e13c6342cfa7eca6f3dbc69da8"  # Replace with your actual Recipe API key
     api_endpoint = "https://api.recipes.com/search"  # Replace with your actual Recipe API endpoint URL
 
     params = {
