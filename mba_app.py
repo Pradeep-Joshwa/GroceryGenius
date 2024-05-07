@@ -9,21 +9,8 @@ import requests
 #
 
 
-import openai
 
-# Set up OpenAI API
-openai.api_key = "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"
 
-def get_response(prompt):
-    response = openai.Completion.create(
-        engine="text-davinci-003",
-        prompt=prompt,
-        max_tokens=1024,
-        n=1,
-        stop=None,
-        temperature=0.5,
-    )
-    return response.choices[0].text.strip()
 
 #
 
@@ -76,22 +63,7 @@ if file_bytes is not None:
     st.pyplot()
 
 
-#
-st.header("AI Chat Assistant")
-st.write("Ask me anything related to grocery shopping or basket analysis!")
 
-# Create a text input for the user's question
-user_input = st.text_area("Enter your question:")
-
-# Create a button to submit the question
-if st.button("Submit"):
-    # Get the response from the OpenAI API
-    response = get_response(user_input)
-
-    # Display the response
-    st.write(response)
-
-#
 
 
 # Add a button to recommend recipes
