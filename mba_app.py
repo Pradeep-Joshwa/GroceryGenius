@@ -8,7 +8,7 @@ import matplotlib.pyplot as plt
 import openai  # Import the OpenAI library
 
 # Set up OpenAI API key
-openai.api_key = "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"
+openai.api_key = "sk-proj-BZH2oNyZt45UtGptMZ7iT3BlbkFJ37YZVGxkOyA948fihOtw"
 
 # Define a function to generate a response from the OpenAI API
 def get_response(prompt):
