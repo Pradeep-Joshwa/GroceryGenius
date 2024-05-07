@@ -8,34 +8,30 @@ import matplotlib.pyplot as plt
 import requests
 
 def get_recipe_recommendations(selected_groceries):
-    api_key = "29a866e13c6342cfa7eca6f3dbc69da8"  # Replace with your actual Recipe API key
-    api_endpoint = "https://api.spoonacular.com/recipes/findByIngredients"  # Replace with your actual Recipe API endpoint URL
+    app_id = "fb4bb9e7"  # Replace with your Edamam API app ID
+    app_key = "f28a3b21fbd5096ccd203509d2613502	—"  # Replace with your Edamam API app key
+    api_endpoint = "https://api.edamam.com/search"
 
     params = {
-        "ingredients": ",".join(selected_groceries),
-        "apiKey": api_key,
-        "limit": 5  # Number of recipes to retrieve
+        "q": ",".join(selected_groceries),
+        "app_id": app_id,
+        "app_key": app_key,
+        "to": 5  # Number of recipes to retrieve
     }
 
     try:
-        response = requests.get(api_endpoint, params=params, verify=False)
+        response = requests.get(api_endpoint, params=params)
         response.raise_for_status()  # Check for HTTP errors
 
         if response.status_code == 200:
-            data = response.json()
-            if 'recipes' in data:
-                recipes = data['recipes']
-                return recipes
-            else:
-                st.error("No recipe data found in the API response.")
-                return None
+            recipes = response.json()['hits']
+            return recipes
         else:
             st.error(f"Error fetching recipes: {response.status_code}")
             return None
     except requests.exceptions.RequestException as e:
         st.error(f"Error fetching recipes: {e}")
         return None
-
 
 st.title('GroceryGenius Smart Grocery Shopping Using Basket Analysis')
 
