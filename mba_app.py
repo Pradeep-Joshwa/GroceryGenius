@@ -14,28 +14,18 @@ import openai
 # Set up OpenAI API
 openai.api_key = "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"
 
-# Function to interact with OpenAI API
-# Function to interact with OpenAI API
-def ask_ai(question):
+def get_response(prompt):
     response = openai.Completion.create(
-        engine="davinci",  # You can choose different models like davinci-codex, davinci-instruct-beta, etc.
-        prompt=question,
-        max_tokens=150
+        engine="text-davinci-003",
+        prompt=prompt,
+        max_tokens=1024,
+        n=1,
+        stop=None,
+        temperature=0.5,
     )
     return response.choices[0].text.strip()
 
-# Main Streamlit app code
-st.title("AI Assistant for General Questions")
-
-question = st.text_input("Ask your question here:")
-if question:
-    answer = ask_ai(question)
-    st.write("AI's Response:")
-    st.write(answer)
-
-
 #
-
 
 st.title('GroceryGenius Smart Grocery Shopping Using Basket Analysis')
 
@@ -84,6 +74,25 @@ if file_bytes is not None:
     plt.axis("off")
     plt.show()
     st.pyplot()
+
+
+#
+st.header("AI Chat Assistant")
+st.write("Ask me anything related to grocery shopping or basket analysis!")
+
+# Create a text input for the user's question
+user_input = st.text_area("Enter your question:")
+
+# Create a button to submit the question
+if st.button("Submit"):
+    # Get the response from the OpenAI API
+    response = get_response(user_input)
+
+    # Display the response
+    st.write(response)
+
+#
+
 
 # Add a button to recommend recipes
 recommend_recipes_button = st.button("Recommend Recipes")
