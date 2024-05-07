@@ -6,7 +6,8 @@ from wordcloud import WordCloud, STOPWORDS
 import matplotlib.pyplot as plt
 
 # Import the AI assistant code here (assuming it's saved in another Python file)
-from ai_assistant import setup_ai_assistant, run_ai_assistant
+import app.py
+from streamlit import secrets.toml
 
 # Set up the Streamlit app
 st.title('GroceryGenius Smart Grocery Shopping Using Basket Analysis')
