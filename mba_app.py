@@ -34,31 +34,7 @@ if question:
 
 
 #
-def get_recipe_recommendations(selected_groceries):
-    app_id = "fb4bb9e7"  # Replace with your Edamam API app ID
-    app_key = "f28a3b21fbd5096ccd203509d2613502	—"  # Replace with your Edamam API app key
-    api_endpoint = "https://api.edamam.com/search"
 
-    params = {
-        "q": ",".join(selected_groceries),
-        "app_id": app_id,
-        "app_key": app_key,
-        "to": 5  # Number of recipes to retrieve
-    }
-
-    try:
-        response = requests.get(api_endpoint, params=params)
-        response.raise_for_status()  # Check for HTTP errors
-
-        if response.status_code == 200:
-            recipes = response.json()['hits']
-            return recipes
-        else:
-            st.error(f"Error fetching recipes: {response.status_code}")
-            return None
-    except requests.exceptions.RequestException as e:
-        st.error(f"Error fetching recipes: {e}")
-        return None
 
 st.title('GroceryGenius Smart Grocery Shopping Using Basket Analysis')
 
