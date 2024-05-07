@@ -6,8 +6,7 @@ from apyori import apriori
 from wordcloud import WordCloud, STOPWORDS
 import matplotlib.pyplot as plt
 import openai  # Import the OpenAI library
-import os
-os.environ["sk-proj-BZH2oNyZt45UtGptMZ7iT3BlbkFJ37YZVGxkOyA948fihOtw"] = "sk-proj-BZH2oNyZt45UtGptMZ7iT3BlbkFJ37YZVGxkOyA948fihOtw"
+
 # Set up OpenAI API key
 openai.api_key = "sk-proj-BZH2oNyZt45UtGptMZ7iT3BlbkFJ37YZVGxkOyA948fihOtw"
 
