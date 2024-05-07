@@ -10,7 +10,7 @@ import requests
 import openai
 
 # Set up OpenAI API key
-openai.api_key = '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'
+openai.api_key = 'sk-proj-R8sHBQxp088F31PTSAWFT3BlbkFJUGvaeGAyVXktfN1xGVUk'
 
 # Define OpenAI functions
 def generate_recipe_description(ingredients):
