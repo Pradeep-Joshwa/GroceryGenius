@@ -17,7 +17,7 @@ groceries_input = st.text_input("Enter your groceries separated by commas (e.g.,
 
 # Check if the user has entered any groceries
 if groceries_input:
-    url = "https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/findByIngredients"
+    url = "www.themealdb.com/api/json/v1/1/search.php?s=Arrabiata"
     querystring = {
         "ingredients": groceries_input,
         "number": "5",
