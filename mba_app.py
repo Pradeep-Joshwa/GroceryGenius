@@ -8,8 +8,8 @@ import matplotlib.pyplot as plt
 import requests
 
 def get_recipe_recommendations(selected_groceries):
-    api_key = "29a866e13c6342cfa7eca6f3dbc69da8"  # Replace with your actual Recipe API key
-    api_endpoint = "https://api.spoonacular.com/recipes/complexSearch"
+    api_key = "YOUR_API_KEY"  # Replace with your actual Recipe API key
+    api_endpoint = "https://api.recipes.com/search"  # Replace with your actual Recipe API endpoint URL
 
     params = {
         "ingredients": ",".join(selected_groceries),
@@ -20,11 +20,22 @@ def get_recipe_recommendations(selected_groceries):
     try:
         response = requests.get(api_endpoint, params=params)
         response.raise_for_status()  # Check for HTTP errors
-        recipes = response.json()['recipes']
-        return recipes
+
+        if response.status_code == 200:
+            data = response.json()
+            if 'recipes' in data:
+                recipes = data['recipes']
+                return recipes
+            else:
+                st.error("No recipe data found in the API response.")
+                return None
+        else:
+            st.error(f"Error fetching recipes: {response.status_code}")
+            return None
     except requests.exceptions.RequestException as e:
         st.error(f"Error fetching recipes: {e}")
         return None
+
 
 st.title('GroceryGenius Smart Grocery Shopping Using Basket Analysis')
 
