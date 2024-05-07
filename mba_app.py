@@ -7,7 +7,7 @@ import matplotlib.pyplot as plt
 
 # Import the AI assistant code here (assuming it's saved in another Python file)
 import app.py
-from streamlit import secrets.toml
+from streamlit import secrets
 
 # Set up the Streamlit app
 st.title('GroceryGenius Smart Grocery Shopping Using Basket Analysis')
