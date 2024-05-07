@@ -8,35 +8,41 @@ import matplotlib.pyplot as plt
 import requests
 #
 
-from bs4 import BeautifulSoup
 
-def scrape_recipes():
-    url = 'https://www.indianhealthyrecipes.com/recipes/'
-    response = requests.get(url)
-    recipes = []
+
+st.title('Recipe Finder')
+
+# Get user input for groceries
+groceries_input = st.text_input("Enter your groceries separated by commas (e.g., apples,flour,sugar)")
+
+# Check if the user has entered any groceries
+if groceries_input:
+    url = "https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/findByIngredients"
+    querystring = {
+        "ingredients": groceries_input,
+        "number": "5",
+        "ignorePantry": "true",
+        "ranking": "1"
+    }
+    headers = {
+        "X-RapidAPI-Key": "499e35eaeamsh50fd2d94bf83289p123236jsn4ebf224c7fd4",
+        "X-RapidAPI-Host": "spoonacular-recipe-food-nutrition-v1.p.rapidapi.com"
+    }
+
+    st.write("Fetching recipes...")
+
+    response = requests.get(url, headers=headers, params=querystring)
 
     if response.status_code == 200:
-        soup = BeautifulSoup(response.content, 'html.parser')
-        recipe_cards = soup.find_all('div', class_='simple-grid-item')
-
-        for card in recipe_cards:
-            title = card.find('h2', class_='post-title').text.strip()
-            link = card.find('a')['href']
-            recipes.append({'title': title, 'link': link})
-
-    return recipes
-
-st.title('Indian Recipes')
-st.write("Click the button below to fetch Indian recipes.")
-
-if st.button('Fetch Recipes'):
-    indian_recipes = scrape_recipes()
-    if indian_recipes:
-        st.header('Indian Recipes')
-        for recipe in indian_recipes:
-            st.write(f"[{recipe['title']}]({recipe['link']})")
+        recipes = response.json()
+        st.write("Recipe Results:")
+        for recipe in recipes:
+            st.write(f"- {recipe['title']}")
     else:
-        st.write('No recipes found.')
+        st.write("Failed to fetch recipes. Status code:", response.status_code)
+else:
+    st.write("Enter your groceries in the input field above.")
+
 
 #
 def get_recipe_recommendations(selected_groceries):
