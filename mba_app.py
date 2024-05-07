@@ -15,6 +15,7 @@ import openai
 openai.api_key = "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"
 
 # Function to interact with OpenAI API
+# Function to interact with OpenAI API
 def ask_ai(question):
     response = openai.Completion.create(
         engine="davinci",  # You can choose different models like davinci-codex, davinci-instruct-beta, etc.
@@ -24,7 +25,7 @@ def ask_ai(question):
     return response.choices[0].text.strip()
 
 # Main Streamlit app code
-st.title("AI Assistant for Recipes, Nutrition, and Food Combination")
+st.title("AI Assistant for General Questions")
 
 question = st.text_input("Ask your question here:")
 if question:
