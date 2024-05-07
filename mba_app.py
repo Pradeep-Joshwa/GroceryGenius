@@ -18,7 +18,7 @@ def get_recipe_recommendations(selected_groceries):
     }
 
     try:
-        response = requests.get(api_endpoint, params=params)
+        response = requests.get(api_endpoint, params=params, verify=False)
         response.raise_for_status()  # Check for HTTP errors
 
         if response.status_code == 200:
