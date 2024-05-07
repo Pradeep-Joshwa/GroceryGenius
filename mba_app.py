@@ -9,7 +9,7 @@ import requests
 
 def get_recipe_recommendations(selected_groceries):
     api_key = "29a866e13c6342cfa7eca6f3dbc69da8"  # Replace with your actual Recipe API key
-    api_endpoint = "https://api.spoonacular.com/food/products/search"  # Replace with your actual Recipe API endpoint URL
+    api_endpoint = "https://api.spoonacular.com/recipes/findByIngredients"  # Replace with your actual Recipe API endpoint URL
 
     params = {
         "ingredients": ",".join(selected_groceries),
