@@ -1,4 +1,3 @@
-
 import streamlit as st
 import pandas as pd
 import numpy as np
@@ -8,7 +7,7 @@ from wordcloud import WordCloud, STOPWORDS
 import matplotlib.pyplot as plt
 
 
-st.title('Grocery Genius Smart Grocery Shopping Using Basket Analysis')
+st.title('Smart Grocery Shopping Assistant with Basket Analysis App')
 
 
 st.set_option('deprecation.showPyplotGlobalUse', False)
