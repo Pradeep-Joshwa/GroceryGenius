@@ -9,39 +9,28 @@ import requests
 #
 
 
+import openai
 
-st.title('Recipe Finder')
+# Set up OpenAI API
+openai.api_key = "sk-proj-R8sHBQxp088F31PTSAWFT3BlbkFJUGvaeGAyVXktfN1xGVUk"
 
-# Get user input for groceries
-groceries_input = st.text_input("Enter your groceries separated by commas (e.g., apples,flour,sugar)")
+# Function to interact with OpenAI API
+def ask_ai(question):
+    response = openai.Completion.create(
+        engine="davinci",  # You can choose different models like davinci-codex, davinci-instruct-beta, etc.
+        prompt=question,
+        max_tokens=150
+    )
+    return response.choices[0].text.strip()
 
-# Check if the user has entered any groceries
-if groceries_input:
-    url = "www.themealdb.com/api/json/v1/1/search.php?s=Arrabiata"
-    querystring = {
-        "ingredients": groceries_input,
-        "number": "5",
-        "ignorePantry": "true",
-        "ranking": "1"
-    }
-    headers = {
-        "X-RapidAPI-Key": "499e35eaeamsh50fd2d94bf83289p123236jsn4ebf224c7fd4",
-        "X-RapidAPI-Host": "spoonacular-recipe-food-nutrition-v1.p.rapidapi.com"
-    }
+# Main Streamlit app code
+st.title("AI Assistant for Recipes, Nutrition, and Food Combination")
 
-    st.write("Fetching recipes...")
-
-    response = requests.get(url, headers=headers, params=querystring)
-
-    if response.status_code == 200:
-        recipes = response.json()
-        st.write("Recipe Results:")
-        for recipe in recipes:
-            st.write(f"- {recipe['title']}")
-    else:
-        st.write("Failed to fetch recipes. Status code:", response.status_code)
-else:
-    st.write("Enter your groceries in the input field above.")
+question = st.text_input("Ask your question here:")
+if question:
+    answer = ask_ai(question)
+    st.write("AI's Response:")
+    st.write(answer)
 
 
 #
